@@ -13,7 +13,7 @@ class mismatches:
         else:
             return False
 
-class motifs:
+class Motifs:
     def motif(self, DNA, k, d):
         shared = False
         shares = 0
@@ -36,7 +36,7 @@ class motifs:
                
 
 class MotifEnumeration:
-    def main(self, DNA, k, d):
+    def motifenumberation(self, DNA, k, d):
         _setDNA = set()
         
         for i in DNA:        
@@ -45,7 +45,7 @@ class MotifEnumeration:
                     pattern = _setDNA[i:i+k]
                     for m in range(len(_setDNA) - k):
                         test = i[m:m+k]
-                        if mismatches.mismatch(pattern, test, d) and motifs.motif(DNA, test, d):
+                        if mismatches.mismatch(pattern, test, d) and Motifs.motif(DNA, test, d):
                             _setDNA.add(test)
                             
                             
@@ -60,4 +60,4 @@ if __name__ == "__main__":
     DNA = ["ATTTGGC", "TGCCTTA", "CGGTATC", "GAAAATT"]
     k = 3
     d = 1
-    p.main(DNA, k, d)
+    p.motifenumberation(DNA, k, d)
