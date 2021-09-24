@@ -1,63 +1,37 @@
+import itertools
+def combination(k):
+    return (''.join(p) for p in itertools.product('ATCG', repeat=k))
 
-class mismatches:
-    def mismatch(self, _setDNA, test, d):
-        _mismatches = 0
-        for i in range(len(_setDNA)):
-            if _mismatches <= d:
-                if _setDNA[i] != test[i]:
-                    _mismatches += 1
-            else:
-                break
-        if _mismatches <= d:
-            return True
-        else:
-            return False
+def hum_dis(pattern, seq):
+    distance = 0
+    for i in range(len(pattern)):
+        if len(pattern) == len(seq) and pattern[i] != seq[i]:
+            distance +=1
+    return distance
 
-class Motifs:
-    def motif(self, DNA, k, d):
-        shared = False
-        shares = 0
+def kmerchecker(m, k):
+    for i in range(len(m) - (k-1)):
+        yield m[i:i+k]
         
-        for i in DNA:
-            found = False
-            for j in range(len(i), len(k)):
-                test = i[j:j+len(k)]
-                if mismatches.mismatch(k, test, d) <= d:
-                    print(k + " " + test)
-                    found = True
-                    shares += 1
-                    break
-            if found == False:
-                break
+def kmerchecker_in(combo, DNA, k, d):
+    checker = False
+    for i in kmerchecker(DNA, k):
+        if hum_dis(combo, i) <= d:
+            checker = True
+    return checker      
+
+def motif_enumeration(k, d, DNAs):
+    pattern = set()
+    for combo in combination(k):
+        if all(kmerchecker_in(combo, DNA, k, d) for DNA in DNAs):
+            pattern.add(combo)
             
-        if shares == len(DNA):
-            shared = True
-        return shared
-               
+    return pattern
 
-class MotifEnumeration:
-    def motifenumberation(self, DNA, k, d):
-        _setDNA = set()
-        
-        for i in DNA:        
-            for j in range(len(DNA[i])):
-                if j+3 <= len(DNA[i]):
-                    pattern = _setDNA[i:i+k]
-                    for m in range(len(_setDNA) - k):
-                        test = i[m:m+k]
-                        if mismatches.mismatch(pattern, test, d) and Motifs.motif(DNA, test, d):
-                            _setDNA.add(test)
-                            
-                            
-        # Strings
-        print(k , d)
-        #print(DNA)
-     
-        
-        
 if __name__ == "__main__":
-    p = MotifEnumeration()
-    DNA = ["ATTTGGC", "TGCCTTA", "CGGTATC", "GAAAATT"]
-    k = 3
-    d = 1
-    p.motifenumberation(DNA, k, d)
+
+    DNAs = ['TTGCCAAGGTCCTGTCTGGCGGCAA', 'ACTGATCGAGCCGTACAGGTCGCTA', 'TTAGGACTGACAGGATTACAACGTG', 'CATAGGTATCTGTAGTCTACAAGGG','CTCCCTTATACGCTTCTGCAGAGGG', 'ACAGAGCGTGACCAGCTATCGAGGG','GGATCGGCATGAGGTCGGGTAAAAG', 'CAGGACTTGCTCCTTTGTGGTTCAC', 'CAGGGGGGATCTGCTGGGTGATTCG', 'GCTCGAGGAAGAGGATGTTAGAAGA']
+    ans = motif_enumeration(5, 2, DNAs)
+
+    #print(list(ans))
+    print(' '.join(ans))
