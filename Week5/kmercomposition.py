@@ -12,12 +12,6 @@ def debrujin(strings):
     for str in strings:
         dicts[str[:-1]].append(str[1:])
     return dicts
-def getpath(kmers):
-    DNA = ''
-    for kmer in kmers:
-        DNA += kmer[0]
-    DNA += kmer[1:]
-    return DNA
 
 def euleriancheck(dupcheck):
     lists=[]
@@ -52,5 +46,9 @@ if __name__ == "__main__":
     print(lists)
     getbrugin = debrujin(lists)
     eulerian = euleriancheck(getbrugin)
-    ans = getpath(eulerian)
+    
+    ans = ''
+    for kmer in eulerian:
+        ans += kmer[0]
+    ans += kmer[1:]    
     print(ans)
