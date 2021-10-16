@@ -1,10 +1,17 @@
-if __name__ == "__main__":
-
-    _str = "ADD DNA HERE"
-    k = 50
-    ans = []
-    for i in range(len(_str)):
-        if k + i <= len(_str):
-            ans.appenda_str[i:k+i])
+"""
+EULERIANCYCLE(Graph)
+    form a cycle Cycle by randomly walking in Graph (don't visit the same edge twice!)
+    while there are unexplored edges in Graph
+        select a node newStart in Cycle with still unexplored edges
+        form Cycle’ by traversing Cycle (starting at newStart) and then randomly walking
+        Cycle ← Cycle’
+    return Cycle
+"""
+def euleriancycle():
+    print("TEST")
     
-    print('\n'.join(str(i) for i in sorted(ans)))
+
+
+if __name__ == "__main__":
+    euleriancycle()
+    
