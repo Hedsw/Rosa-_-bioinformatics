@@ -25,7 +25,7 @@ class xfinder:
 
     def combinationsRemain(self):
         if (len(self.state) == 0):
-            # handles first time
+            # handles first t ime
             self.state = [0 for i in range(self.count)]
             return True
         else:
