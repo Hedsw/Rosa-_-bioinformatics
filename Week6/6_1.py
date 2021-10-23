@@ -6,6 +6,6 @@ def mulset(xs):
             multiset.append(xs[j] - xs[x])         
     print(multiset)
 if __name__ == "__main__":
-    x = [0, 3, 8, 10]
+    x = [0, 3, 4, 5, 6, 9, 15]
     mulset(x)
     
