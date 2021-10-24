@@ -1,5 +1,6 @@
 #! /usr/bin/python
 import math
+import timeit
 
 class xfinder:
     def __init__(self, L, c):
@@ -39,6 +40,8 @@ class xfinder:
             return (sum(self.dicPDP) != 0)
 
 if __name__ == "__main__":
+    start = timeit.default_timer()
+    print("Brute Force Result")
     Lists = [1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 9, 9, 10, 11, 12, 15]
     counting = 0
     print(Lists)
@@ -60,5 +63,6 @@ if __name__ == "__main__":
             
             if(distributedX == Lists):
                 counting += 1
-                print("ANSWER", + counting, " = ", X.answer())
-        
+                print("X", + counting, " : ", X.answer())
+    stop = timeit.default_timer()
+    print('Time: ', stop - start)  
