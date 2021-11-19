@@ -14,10 +14,11 @@ def minDistance(word1, word2):
             if word1[i - 1] == word2[j - 1]:
                 tb[i][j] = tb[i - 1][j - 1]
             else:
+                # This condition is indel and unmatched cases 
+                # So that we could choose minimum values in the three cases
                 tb[i][j] = 1 + min(tb[i - 1][j], tb[i][j - 1], tb[i - 1][j - 1])
     return tb[-1][-1]
         
-
 given = "TEXT1"
 _str = "TEXT2"
 
